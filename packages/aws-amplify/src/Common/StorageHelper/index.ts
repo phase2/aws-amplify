@@ -14,6 +14,9 @@
  // import polyfill for server environment
 import '../Polyfills';
 
-const StorageHelper = window.localStorage;
+// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context 
+const StorageHelper = (typeof window === 'undefined' && typeof navigationDocument !== 'undefined')
+  ? localStorage
+  : window.localStorage;
 
 export default StorageHelper;
